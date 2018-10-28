@@ -98,6 +98,30 @@ public class MatrizTest {
 		resultMatriz res = matriz.execute("UPDATE 2 2 2");
 		assertTrue(res.status == Matriz.status.ERROR);
 	}
+	
+	@Test
+	public void executeExecuteValidationTest() {
+
+		// UPDATE x < N
+		resultMatriz res = matriz.execute("UPDATE 2 5 2 4");
+		assertTrue(res.status == Matriz.status.ERROR);
+	}
+	
+	@Test
+	public void executeExecuteValidationTest2() {
+
+		// UPDATE y < N
+		resultMatriz res = matriz.execute("UPDATE 5 2 2 4");
+		assertTrue(res.status == Matriz.status.ERROR);
+	}
+	
+	@Test
+	public void executeExecuteValidationTest3() {
+
+		// UPDATE z < N
+		resultMatriz res = matriz.execute("UPDATE 2 2 5 4");
+		assertTrue(res.status == Matriz.status.ERROR);
+	}
 
 	@Test
 	public void executeExecuteValidationQUERYTest1() {
