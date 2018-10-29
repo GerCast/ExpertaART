@@ -1,10 +1,15 @@
 package com.expertaart;
 
 public class resultMatriz {
-	Matriz.status status;
+	public enum statusResult {
+		SUCCESS, ERROR
+	}
+	
+	public static statusResult status;
+	
 	int value;
 	
-	public resultMatriz(Matriz.status status, int value) {
+	public resultMatriz(statusResult status, int value) {
 		// TODO Auto-generated constructor stub
 		
 		this.status = status;

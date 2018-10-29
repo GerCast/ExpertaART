@@ -8,9 +8,7 @@ public class Matriz {
 	private int[][][] matrizData;
 	private int lado = 0;
 
-	public enum status {
-		SUCCESS, ERROR
-	}
+
 
 	/**
 	 * 
@@ -56,7 +54,7 @@ public class Matriz {
 			}
 		}
 
-		return new resultMatriz(Matriz.status.ERROR, 0);
+		return new resultMatriz(resultMatriz.status.ERROR, 0);
 
 	}
 
@@ -109,14 +107,14 @@ public class Matriz {
 						}
 					}
 
-					return new resultMatriz(Matriz.status.SUCCESS, w);
+					return new resultMatriz(resultMatriz.status.SUCCESS, w);
 				}
 			} catch (Exception e) {
-				return new resultMatriz(Matriz.status.ERROR, 0);
+				return new resultMatriz(resultMatriz.status.ERROR, 0);
 			}
 		}
 
-		return new resultMatriz(Matriz.status.ERROR, 0);
+		return new resultMatriz(resultMatriz.status.ERROR, 0);
 	}
 
 	/**
@@ -142,16 +140,16 @@ public class Matriz {
 				if (x > 0 && x <= lado && y > 0 && y <= lado && z > 0 && z <= lado && w > -127 && w <= 126) {
 
 					matrizData[x-1][y-1][z-1] = w;
-					return new resultMatriz(Matriz.status.SUCCESS, matrizData[x-1][y-1][z-1]);
+					return new resultMatriz(resultMatriz.status.SUCCESS, matrizData[x-1][y-1][z-1]);
 				}
 				
 
 			} catch (Exception e) {
-				return new resultMatriz(Matriz.status.ERROR, 0);
+				return new resultMatriz(resultMatriz.status.ERROR, 0);
 			}
 		}
 
-		return new resultMatriz(Matriz.status.ERROR, 0);
+		return new resultMatriz(resultMatriz.status.ERROR, 0);
 	}
 
 }
