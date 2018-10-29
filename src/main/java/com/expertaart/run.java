@@ -23,6 +23,9 @@ public class run {
 			execute("QUERY 1 1 1 1 1 1");
 			execute("QUERY 1 1 1 2 2 2");
 			execute("QUERY 2 2 2 2 2 2");
+			execute("UPDATE 2 5 2 1"); // Error
+			execute("QUERY 1 1 1 5 2 2"); // Error			
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
