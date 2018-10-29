@@ -74,6 +74,12 @@ public class Matriz {
 		return resultado;
 	}
 
+	/**
+	 * Query Command
+	 * @param parametros
+	 * 4 parameters example ( QUERY x1 y1 z1 x2 y2 z2) 
+	 * @return
+	 */
 	private resultMatriz Query(String[] parametros) {
 		int x;
 		int y;
@@ -113,6 +119,12 @@ public class Matriz {
 		return new resultMatriz(Matriz.status.ERROR, 0);
 	}
 
+	/**
+	 * UPDATE Command
+	 * @param parametros
+	 * 4 parameters example ( UPDATE x y z W), x,y,z coordinates, W = value
+	 * @return
+	 */
 	private resultMatriz Update(String[] parametros) {
 		int x;
 		int y;

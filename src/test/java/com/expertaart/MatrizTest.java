@@ -17,16 +17,42 @@ import org.junit.Test;
 public class MatrizTest {
 	private static Matriz matriz;
 
-	@BeforeClass
-	public static void beforeClass() throws Exception {
+	@Before
+	public  void before() throws Exception {
 		matriz = new Matriz(4);
 	}
 
+	
+	@Test
+	public void executeTestGeneral()
+	{
+		resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
+		assertTrue(res.status == Matriz.status.SUCCESS);
+		res = matriz.execute("QUERY 1 1 1 3 3 3");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 4);
+
+		res = matriz.execute("UPDATE 1 1 1 23");
+		assertTrue(res.status == Matriz.status.SUCCESS);
+		res = matriz.execute("QUERY 2 2 2 4 4 4");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 4);
+		res = matriz.execute("QUERY 1 1 1 3 3 3");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 27);
+
+		res = matriz.execute("UPDATE 2 2 2 1");
+		assertTrue(res.status == Matriz.status.SUCCESS);
+		res = matriz.execute("QUERY 1 1 1 1 1 1");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 23);
+		res = matriz.execute("QUERY 1 1 1 2 2 2");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 24);
+		res = matriz.execute("QUERY 2 2 2 2 2 2");
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 1);
+	
+	}
 	/**
 	 * 
 	 */
 	@Test
-	public void executeExecuteTest() {
+	public void executeTest() {
 		resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
 		assertTrue(res.status == Matriz.status.SUCCESS);
 		res = matriz.execute("QUERY 1 1 1 3 3 3");
@@ -34,23 +60,23 @@ public class MatrizTest {
 	}
 
 	@Test
-	public void executeExecuteTest2() {
+	public void executeTest2() {
 		resultMatriz res = matriz.execute("UPDATE 1 1 1 23");
 		assertTrue(res.status == Matriz.status.SUCCESS);
 		res = matriz.execute("QUERY 2 2 2 4 4 4");
-		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 4);
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 0);
 		res = matriz.execute("QUERY 1 1 1 3 3 3");
-		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 4);
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 23);
 	}
 
 	@Test
-	public void executeExecuteTest3() {
+	public void executeTest3() {
 		resultMatriz res = matriz.execute("UPDATE 2 2 2 1");
 		assertTrue(res.status == Matriz.status.SUCCESS);
 		res = matriz.execute("QUERY 1 1 1 1 1 1");
-		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 23);
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 0);
 		res = matriz.execute("QUERY 1 1 1 2 2 2");
-		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 24);
+		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 1);
 		res = matriz.execute("QUERY 2 2 2 2 2 2");
 		assertTrue(res.status == Matriz.status.SUCCESS && res.value == 1);
 	}
