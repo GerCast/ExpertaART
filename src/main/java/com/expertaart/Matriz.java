@@ -46,15 +46,14 @@ public class Matriz {
 
 		String[] parametros = comando.split(" ");
 
-		if (parametros.length < 1) {
-			return new resultMatriz(Matriz.status.ERROR, 0);
-		}
+		if (parametros.length > 0) {
 
-		if ("UPDATE".equals(parametros[0])) {
-			return Update(parametros);
+			if ("UPDATE".equals(parametros[0])) {
+				return Update(parametros);
 
-		} else if ("QUERY".equals(parametros[0])) {
-			return Query(parametros);
+			} else if ("QUERY".equals(parametros[0])) {
+				return Query(parametros);
+			}
 		}
 
 		return new resultMatriz(Matriz.status.ERROR, 0);
@@ -76,8 +75,39 @@ public class Matriz {
 	}
 
 	private resultMatriz Query(String[] parametros) {
-		if (parametros.length < 1) {
-			return new resultMatriz(Matriz.status.ERROR, 0);
+		int x;
+		int y;
+		int z;
+		int x2;
+		int y2;
+		int z2;
+		int w;
+
+		if (parametros.length == 7) {
+			try {
+				x = Integer.parseInt(parametros[1]);
+				y = Integer.parseInt(parametros[2]);
+				z = Integer.parseInt(parametros[3]);
+				x2 = Integer.parseInt(parametros[4]);
+				y2 = Integer.parseInt(parametros[5]);
+				z2 = Integer.parseInt(parametros[6]);
+				w = 0;
+
+				if (x > 0 && x <= x2 && y > 0 && y <= y2 && z > 0 && z <= z2) {
+
+					for (int i = x; i <= x2; i++) {
+						for (int j = y; j <= y2; j++) {
+							for (int h = z; h <= z2; h++) {
+								w = w + matrizData[i-1][j-1][h-1];
+							}
+						}
+					}
+
+					return new resultMatriz(Matriz.status.SUCCESS, w);
+				}
+			} catch (Exception e) {
+				return new resultMatriz(Matriz.status.ERROR, 0);
+			}
 		}
 
 		return new resultMatriz(Matriz.status.ERROR, 0);
@@ -97,11 +127,12 @@ public class Matriz {
 				z = Integer.parseInt(parametros[3]);
 				w = Integer.parseInt(parametros[4]);
 
-				if (x > 0 && x <= lado && y > 0 && y <= lado && z > 0 && z <= lado) {
+				if (x > 0 && x <= lado && y > 0 && y <= lado && z > 0 && z <= lado && w > -127 && w <= 126) {
 
-					matrizData[x][y][z] = w;
+					matrizData[x-1][y-1][z-1] = w;
+					return new resultMatriz(Matriz.status.SUCCESS, matrizData[x-1][y-1][z-1]);
 				}
-				return new resultMatriz(Matriz.status.SUCCESS, matrizData[x][y][z]);
+				
 
 			} catch (Exception e) {
 				return new resultMatriz(Matriz.status.ERROR, 0);

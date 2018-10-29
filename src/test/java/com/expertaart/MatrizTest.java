@@ -17,19 +17,9 @@ import org.junit.Test;
 public class MatrizTest {
 	private static Matriz matriz;
 
-	@Before
-	public void before() throws Exception {
-		matriz = new Matriz(3);
-	}
-
-	@Test(expected = Exception.class)
-	public void isValidMatrizConstraintExcedTest() throws Exception {
-		matriz = new Matriz(102);
-	}
-
-	@Test(expected = Exception.class)
-	public void isValidMatrizConstraintTest() throws Exception {
-		matriz = new Matriz(0);
+	@BeforeClass
+	public static void beforeClass() throws Exception {
+		matriz = new Matriz(4);
 	}
 
 	/**
@@ -69,9 +59,16 @@ public class MatrizTest {
 	 * W debe ser mayor que cero
 	 */
 	@Test
-	public void executeExecuteValidationGreaterThanZeroTest() {
+	public void executeExecuteValidationWLessThanTest() {
 		// W debe ser mayor que cero
-		resultMatriz res = matriz.execute("UPDATE 2 2 2 0");
+		resultMatriz res = matriz.execute("UPDATE 2 2 2 -127");
+		assertTrue(res.status == Matriz.status.ERROR);
+	}
+	
+	@Test
+	public void executeExecuteValidationWGreaterThanTest() {
+		// W debe ser mayor que cero
+		resultMatriz res = matriz.execute("UPDATE 2 2 2 127");
 		assertTrue(res.status == Matriz.status.ERROR);
 	}
 
@@ -80,7 +77,7 @@ public class MatrizTest {
 
 		// W debe ser menor igual que cien
 		resultMatriz res = matriz.execute("UPDATE 2 2 2 102");
-		assertTrue(res.status == Matriz.status.ERROR);
+		assertTrue(res.status == Matriz.status.SUCCESS);
 	}
 
 	@Test
@@ -126,27 +123,27 @@ public class MatrizTest {
 	@Test
 	public void executeExecuteValidationQUERYTest1() {
 		// W debe ser mayor que cero
-		resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
-		assertTrue(res.status == Matriz.status.SUCCESS);
-		res = matriz.execute("QUERY 1 1 1 3 3 ");
+		//resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
+		//assertTrue(res.status == Matriz.status.SUCCESS);
+		resultMatriz res = matriz.execute("QUERY 1 1 1 3 3 ");
 		assertTrue(res.status == Matriz.status.ERROR);
 	}
 	
 	@Test
 	public void executeExecuteValidationQUERYTest2() {
 		// W debe ser mayor que cero
-		resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
-		assertTrue(res.status == Matriz.status.SUCCESS);
-		res = matriz.execute("QUERY 1 1");
+		//resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
+		//assertTrue(res.status == Matriz.status.SUCCESS);
+		resultMatriz res = matriz.execute("QUERY 1 1");
 		assertTrue(res.status == Matriz.status.ERROR);
 	}
 
 	@Test
 	public void executeExecuteValidationQUERYTest3() {
 		// W debe ser mayor que cero
-		resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
-		assertTrue(res.status == Matriz.status.SUCCESS);
-		res = matriz.execute("QUERY 1 1 1 3 3 300");
+		//resultMatriz res = matriz.execute("UPDATE 2 2 2 4");
+		//assertTrue(res.status == Matriz.status.SUCCESS);
+		resultMatriz res = matriz.execute("QUERY 1 1 1 3 3 300");
 		assertTrue(res.status == Matriz.status.ERROR);
 	}
 }
