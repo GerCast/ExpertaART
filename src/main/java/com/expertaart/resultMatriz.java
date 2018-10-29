@@ -10,5 +10,10 @@ public class resultMatriz {
 		this.status = status;
 		this.value = value;
 	}
+	
+	public String toString()
+	{
+		return this.status.toString() + " / " + value;
+	}
 
 }
